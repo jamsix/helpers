@@ -7,6 +7,10 @@ if [ "" == "$PIP_OK" ]; then
   apt-get --force-yes --yes install python-pip python-dev build-essential
 fi
 
+apt-get clean all
+apt-get update
+apt-get remove te-va
+
 for i in "${packages[@]}"
 do
   if [ ! -d ./"$i" ]; then
@@ -17,9 +21,6 @@ do
   pip install -e $i
 done
 
-apt-get clean all
-apt-get update
-apt-get remove te-va
 apt-get install te-va
 apt-get install te-agent
 apt-get install te-browserbot
