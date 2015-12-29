@@ -18,6 +18,7 @@ do
 done
 
 apt-get update
+apt-get remove te-va
 apt-get install te-va
 apt-get install te-agent
 apt-get install te-browserbot
