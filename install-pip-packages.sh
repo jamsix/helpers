@@ -9,7 +9,7 @@ fi
 
 for i in "${packages[@]}"
 do
-  if [ ! -d "$i" ]; then
+  if [ ! -d ./"$i" ]; then
     wget https://pypi.python.org/packages/source/${i:0:1}/${i%-*}/$i.tar.gz
     tar -xvf $i.tar.gz
     rm $i.tar.gz
