@@ -5,9 +5,11 @@ packages=('itsdangerous-0.24' 'MarkupSafe-0.23' 'Jinja2-2.8' 'Werkzeug-0.11.3' '
 
 for i in "${packages[@]}"
 do
-  wget https://pypi.python.org/packages/source/${i:0:1}/${i%-*}/$i.tar.gz
-  tar -xvf $i.tar.gz
-  rm $i.tar.gz
+  if [ ! -d "$i" ]; then
+    wget https://pypi.python.org/packages/source/${i:0:1}/${i%-*}/$i.tar.gz
+    tar -xvf $i.tar.gz
+    rm $i.tar.gz
+  fi
   pip install -e $i
 done
 
