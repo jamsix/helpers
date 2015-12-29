@@ -1,5 +1,8 @@
 #!/bin/bash
-apt-get install python-pip python-dev build-essential
+PIP_OK=$(dpkg-query -W --showformat='${Status}\n' python-pip | grep "install ok installed")
+if [ "" == "$PIP_OK" ]; then
+  apt-get --force-yes --yes install python-pip python-dev build-essential
+fi
 
 packages=('itsdangerous-0.24' 'MarkupSafe-0.23' 'Jinja2-2.8' 'Werkzeug-0.11.3' 'Flask-0.10.1' 'SQLAlchemy-1.0.11' 'Flask-SQLAlchemy-2.0')
 
