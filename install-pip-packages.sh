@@ -17,6 +17,7 @@ do
   pip install -e $i
 done
 
+apt-get clean all
 apt-get update
 apt-get remove te-va
 apt-get install te-va
