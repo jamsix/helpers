@@ -16,7 +16,7 @@ apt-get remove te-va
 for i in "${packages[@]}"
 do
   if [ ! -d ./"$i" ]; then
-    wget https://pypi.python.org/packages/source/${i:0:1}/${i%-*}/$i.tar.gz
+    wget $* https://pypi.python.org/packages/source/${i:0:1}/${i%-*}/$i.tar.gz
     tar -xvf $i.tar.gz
     rm $i.tar.gz
   fi
@@ -24,11 +24,11 @@ do
 done
 
 
-wget http://mirrors.kernel.org/ubuntu/pool/universe/libo/libosip2/libosip2-10_4.0.0-3ubuntu2_amd64.deb
+wget $* http://mirrors.kernel.org/ubuntu/pool/universe/libo/libosip2/libosip2-10_4.0.0-3ubuntu2_amd64.deb
 dpkg -i libosip2-10_4.0.0-3ubuntu2_amd64.deb
 rm libosip2-10_4.0.0-3ubuntu2_amd64.deb
 
-wget http://mirrors.kernel.org/ubuntu/pool/universe/n/ndisc6/rdnssd_1.0.1-1ubuntu1_amd64.deb
+wget $* http://mirrors.kernel.org/ubuntu/pool/universe/n/ndisc6/rdnssd_1.0.1-1ubuntu1_amd64.deb
 dpkg -i rdnssd_1.0.1-1ubuntu1_amd64.deb
 rm rdnssd_1.0.1-1ubuntu1_amd64.deb
 
