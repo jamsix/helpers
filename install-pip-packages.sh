@@ -16,19 +16,30 @@ apt-get remove te-va
 for i in "${packages[@]}"
 do
   if [ ! -d ./"$i" ]; then
-    wget $* https://pypi.python.org/packages/source/${i:0:1}/${i%-*}/$i.tar.gz
+    if [ -n "$1" ]; then
+      wget -e use_proxy=yes -e http_proxy=$1 -e https_proxy=$1 https://pypi.python.org/packages/source/${i:0:1}/${i%-*}/$i.tar.gz
+    else
+      wget https://pypi.python.org/packages/source/${i:0:1}/${i%-*}/$i.tar.gz
+    fi
     tar -xvf $i.tar.gz
     rm $i.tar.gz
   fi
   pip install -e $i
 done
 
-
-wget $* http://mirrors.kernel.org/ubuntu/pool/universe/libo/libosip2/libosip2-10_4.0.0-3ubuntu2_amd64.deb
+if [ -n "$1" ]; then
+  wget -e use_proxy=yes -e http_proxy=$1 -e https_proxy=$1 http://mirrors.kernel.org/ubuntu/pool/universe/libo/libosip2/libosip2-10_4.0.0-3ubuntu2_amd64.deb
+else
+  wget http://mirrors.kernel.org/ubuntu/pool/universe/libo/libosip2/libosip2-10_4.0.0-3ubuntu2_amd64.deb
+fi
 dpkg -i libosip2-10_4.0.0-3ubuntu2_amd64.deb
 rm libosip2-10_4.0.0-3ubuntu2_amd64.deb
 
-wget $* http://mirrors.kernel.org/ubuntu/pool/universe/n/ndisc6/rdnssd_1.0.1-1ubuntu1_amd64.deb
+if [ -n "$1" ]; then
+  wget -e use_proxy=yes -e http_proxy=$1 -e https_proxy=$1 http://mirrors.kernel.org/ubuntu/pool/universe/n/ndisc6/rdnssd_1.0.1-1ubuntu1_amd64.deb
+else
+  wget http://mirrors.kernel.org/ubuntu/pool/universe/n/ndisc6/rdnssd_1.0.1-1ubuntu1_amd64.deb
+fi
 dpkg -i rdnssd_1.0.1-1ubuntu1_amd64.deb
 rm rdnssd_1.0.1-1ubuntu1_amd64.deb
 
