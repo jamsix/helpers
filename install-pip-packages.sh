@@ -1,5 +1,5 @@
 #!/bin/bash
-packages=('itsdangerous-0.24' 'MarkupSafe-0.23' 'Jinja2-2.8' 'Werkzeug-0.11.3' 'Flask-0.10.1' 'SQLAlchemy-1.0.11' 'Flask-SQLAlchemy-2.0')
+packages=('requests-2.9.1' 'itsdangerous-0.24' 'MarkupSafe-0.23' 'Jinja2-2.8' 'Werkzeug-0.11.3' 'Flask-0.10.1' 'SQLAlchemy-1.0.11' 'Flask-SQLAlchemy-2.0')
 
 
 PIP_OK=$(dpkg-query -W --showformat='${Status}\n' python-pip | grep "install ok installed")
