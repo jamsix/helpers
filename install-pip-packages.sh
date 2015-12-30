@@ -36,16 +36,16 @@ if [ -n "$1" ]; then
 else
   wget http://mirrors.kernel.org/ubuntu/pool/universe/libo/libosip2/libosip2_4.0.0-3ubuntu2.debian.tar.gz
 fi
-dpkg -i libosip2-10_4.0.0-3ubuntu2_amd64.deb
-rm libosip2-10_4.0.0-3ubuntu2_amd64.deb
+dpkg -i libosip2_4.0.0-3ubuntu2.debian.tar.gz
+rm libosip2_4.0.0-3ubuntu2.debian.tar.gz
 
 if [ -n "$1" ]; then
   wget -e use_proxy=yes -e http_proxy=$1 -e https_proxy=$1 http://mirrors.kernel.org/ubuntu/pool/universe/n/ndisc6/rdnssd_1.0.1-1ubuntu1_i386.deb
 else
   wget http://mirrors.kernel.org/ubuntu/pool/universe/n/ndisc6/rdnssd_1.0.1-1ubuntu1_i386.deb
 fi
-dpkg -i rdnssd_1.0.1-1ubuntu1_amd64.deb
-rm rdnssd_1.0.1-1ubuntu1_amd64.deb
+dpkg -i rdnssd_1.0.1-1ubuntu1_i386.deb
+rm rdnssd_1.0.1-1ubuntu1_i386.deb
 
 
 apt-get install te-va
