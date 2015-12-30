@@ -32,12 +32,12 @@ do
 done
 
 if [ -n "$1" ]; then
-  wget -e use_proxy=yes -e http_proxy=$1 -e https_proxy=$1 http://mirrors.kernel.org/ubuntu/pool/universe/libo/libosip2/libosip2_4.0.0-3ubuntu2.debian.tar.gz
+  wget -e use_proxy=yes -e http_proxy=$1 -e https_proxy=$1 http://mirrors.kernel.org/ubuntu/pool/universe/libo/libosip2/libosip2-4_3.3.0-1ubuntu2_i386.deb
 else
-  wget http://mirrors.kernel.org/ubuntu/pool/universe/libo/libosip2/libosip2_4.0.0-3ubuntu2.debian.tar.gz
+  wget http://mirrors.kernel.org/ubuntu/pool/universe/libo/libosip2/libosip2-4_3.3.0-1ubuntu2_i386.deb
 fi
-dpkg -i libosip2_4.0.0-3ubuntu2.debian.tar.gz
-rm libosip2_4.0.0-3ubuntu2.debian.tar.gz
+dpkg -i libosip2-4_3.3.0-1ubuntu2_i386.deb
+rm libosip2-4_3.3.0-1ubuntu2_i386.deb
 
 if [ -n "$1" ]; then
   wget -e use_proxy=yes -e http_proxy=$1 -e https_proxy=$1 http://mirrors.kernel.org/ubuntu/pool/universe/n/ndisc6/rdnssd_1.0.1-1ubuntu1_i386.deb
