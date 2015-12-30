@@ -1,6 +1,9 @@
 #!/bin/bash
 packages=('requests-2.5.0' 'itsdangerous-0.24' 'MarkupSafe-0.23' 'Jinja2-2.8' 'Werkzeug-0.11.3' 'Flask-0.10.1' 'SQLAlchemy-1.0.11' 'Flask-SQLAlchemy-2.0')
 
+if [ -n "$1" ]; then
+  export http_proxy=http://$1
+  export https_proxy=https://$2
 
 PIP_OK=$(dpkg-query -W --showformat='${Status}\n' python-pip | grep "install ok installed")
 if [ "" == "$PIP_OK" ]; then
