@@ -8,7 +8,7 @@ source /usr/local/te-va/venv/bin/activate
 
 if [ -n "$1" ]; then
   export http_proxy=http://$1
-  export https_proxy=https://$2
+  export https_proxy=https://$1
 fi
 
 
