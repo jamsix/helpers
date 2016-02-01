@@ -1,5 +1,6 @@
 #!/bin/bash
-packages=('requests-2.5.0' 'itsdangerous-0.24' 'MarkupSafe-0.23' 'Jinja2-2.8' 'Werkzeug-0.11.3' 'Flask-0.10.1' 'SQLAlchemy-1.0.11' 'Flask-SQLAlchemy-2.0')
+pip_packages=('requests-2.5.0' 'itsdangerous-0.24' 'MarkupSafe-0.23' 'Jinja2-2.8' 'Werkzeug-0.11.3' 'Flask-0.10.1' 'SQLAlchemy-1.0.11' 'Flask-SQLAlchemy-2.0')
+deb_packages=('libo/libosip2/libosip2-4_3.3.0-1ubuntu2_i386.deb' 'n/ndisc6/rdnssd_1.0.1-1ubuntu1_i386.deb' 'b/boost1.46/libboost-system1.46.1_1.46.1-7ubuntu3_i386.deb' 'b/boost1.46/libboost-filesystem1.46.1_1.46.1-7ubuntu3_i386.deb' 'b/boost1.46/libboost-thread1.46.1_1.46.1-7ubuntu3_i386.deb')
 
 if [ -n "$1" ]; then
   export http_proxy=http://$1
@@ -14,10 +15,10 @@ fi
 
 apt-get clean all
 apt-get update
-apt-get remove te-va
+apt-get -y remove te-va
 
 
-for i in "${packages[@]}"
+for i in "${pip_packages[@]}"
 do
   if [ ! -d ./"$i" ]; then
     if [ -n "$1" ]; then
@@ -31,23 +32,19 @@ do
   pip install -e $i
 done
 
-if [ -n "$1" ]; then
-  wget -e use_proxy=yes -e http_proxy=$1 -e https_proxy=$1 http://mirrors.kernel.org/ubuntu/pool/universe/libo/libosip2/libosip2-4_3.3.0-1ubuntu2_i386.deb
-else
-  wget http://mirrors.kernel.org/ubuntu/pool/universe/libo/libosip2/libosip2-4_3.3.0-1ubuntu2_i386.deb
-fi
-dpkg -i libosip2-4_3.3.0-1ubuntu2_i386.deb
-rm libosip2-4_3.3.0-1ubuntu2_i386.deb
 
-if [ -n "$1" ]; then
-  wget -e use_proxy=yes -e http_proxy=$1 -e https_proxy=$1 http://mirrors.kernel.org/ubuntu/pool/universe/n/ndisc6/rdnssd_1.0.1-1ubuntu1_i386.deb
-else
-  wget http://mirrors.kernel.org/ubuntu/pool/universe/n/ndisc6/rdnssd_1.0.1-1ubuntu1_i386.deb
-fi
-dpkg -i rdnssd_1.0.1-1ubuntu1_i386.deb
-rm rdnssd_1.0.1-1ubuntu1_i386.deb
+for i in "${deb_packages[@]}"
+do
+  if [ -n "$1" ]; then
+    wget -e use_proxy=yes -e http_proxy=$1 -e https_proxy=$1 http://mirrors.kernel.org/ubuntu/pool/universe/$i
+  else
+    wget http://mirrors.kernel.org/ubuntu/pool/universe/$i
+  fi
+  dpkg -i ${i##*/}
+  rm ${i##*/}
+done
 
 
-apt-get install te-va
-apt-get install te-agent
-apt-get install te-browserbot
+apt-get -y install te-va
+apt-get -y install te-agent
+apt-get -y install te-browserbot
