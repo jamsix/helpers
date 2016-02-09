@@ -2,6 +2,10 @@
 pip_packages=('requests-2.5.0' 'itsdangerous-0.24' 'MarkupSafe-0.23' 'Jinja2-2.8' 'Werkzeug-0.11.3' 'Flask-0.10.1' 'SQLAlchemy-1.0.11' 'Flask-SQLAlchemy-2.0')
 deb_packages=('libo/libosip2/libosip2-4_3.3.0-1ubuntu2_i386.deb' 'n/ndisc6/rdnssd_1.0.1-1ubuntu1_i386.deb' 'b/boost1.46/libboost-system1.46.1_1.46.1-7ubuntu3_i386.deb' 'b/boost1.46/libboost-filesystem1.46.1_1.46.1-7ubuntu3_i386.deb' 'b/boost1.46/libboost-thread1.46.1_1.46.1-7ubuntu3_i386.deb')
 
+# fix the grub issue (temporary)
+echo grub-pc grub-pc/install_devices multiselect /dev/sda | debconf-set-selections -
+dpkg --configure -a
+
 
 # Enter python virtual environment
 source /usr/local/te-va/venv/bin/activate
