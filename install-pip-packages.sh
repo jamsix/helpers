@@ -1,15 +1,31 @@
 #!/bin/bash
 pip_packages=('requests-2.5.0' 'itsdangerous-0.24' 'MarkupSafe-0.23' 'Jinja2-2.8' 'Werkzeug-0.11.3' 'Flask-0.10.1' 'SQLAlchemy-1.0.11' 'Flask-SQLAlchemy-2.0')
-deb_packages_i386=('libo/libosip2/libosip2-4_3.3.0-1ubuntu2_i386.deb' 'n/ndisc6/rdnssd_1.0.1-1ubuntu1_i386.deb' 'b/boost1.46/libboost-system1.46.1_1.46.1-7ubuntu3_i386.deb' 'b/boost1.46/libboost-filesystem1.46.1_1.46.1-7ubuntu3_i386.deb' 'b/boost1.46/libboost-thread1.46.1_1.46.1-7ubuntu3_i386.deb')
-deb_packages_amd64=('libo/libosip2/libosip2-4_3.3.0-1ubuntu2_amd64.deb' 'n/ndisc6/rdnssd_1.0.1-1ubuntu1_amd64.deb' 'b/boost1.46/libboost-system1.46.1_1.46.1-7ubuntu3_amd64.deb' 'b/boost1.46/libboost-filesystem1.46.1_1.46.1-7ubuntu3_amd64.deb' 'b/boost1.46/libboost-thread1.46.1_1.46.1-7ubuntu3_amd64.deb')
+deb_packages_precise_i386=('libo/libosip2/libosip2-4_3.3.0-1ubuntu2_i386.deb' 'n/ndisc6/rdnssd_1.0.1-1ubuntu1_i386.deb' 'b/boost1.46/libboost-system1.46.1_1.46.1-7ubuntu3_i386.deb' 'b/boost1.46/libboost-filesystem1.46.1_1.46.1-7ubuntu3_i386.deb' 'b/boost1.46/libboost-thread1.46.1_1.46.1-7ubuntu3_i386.deb')
+deb_packages_precise_amd64=('libo/libosip2/libosip2-4_3.3.0-1ubuntu2_amd64.deb  ' 'n/ndisc6/rdnssd_1.0.1-1ubuntu1_amd64.deb' 'b/boost1.46/libboost-system1.46.1_1.46.1-7ubuntu3_amd64.deb' 'b/boost1.46/libboost-filesystem1.46.1_1.46.1-7ubuntu3_amd64.deb' 'b/boost1.46/libboost-thread1.46.1_1.46.1-7ubuntu3_amd64.deb')
+deb_packages_trusty_i386=('libo/libosip2/libosip2-10_4.0.0-3ubuntu2.deb' 'n/ndisc6/rdnssd_1.0.1-1ubuntu1_i386.deb' 'b/boost1.46/libboost-system1.46.1_1.46.1-7ubuntu3_i386.deb' 'b/boost1.46/libboost-filesystem1.46.1_1.46.1-7ubuntu3_i386.deb' 'b/boost1.46/libboost-thread1.46.1_1.46.1-7ubuntu3_i386.deb')
+deb_packages_trusty_amd64=('libo/libosip2/libosip2-10_4.0.0-3ubuntu2_amd64.deb  ' 'n/ndisc6/rdnssd_1.0.1-1ubuntu1_amd64.deb' 'b/boost1.46/libboost-system1.46.1_1.46.1-7ubuntu3_amd64.deb' 'b/boost1.46/libboost-filesystem1.46.1_1.46.1-7ubuntu3_amd64.deb' 'b/boost1.46/libboost-thread1.46.1_1.46.1-7ubuntu3_amd64.deb')
 
 architecture=$(uname -m);
-if [ "$architecture" == "x86_64" ]; then
-  deb_packages=$deb_packages_amd64
-elif [ "$architecture" != "amd64" ]; then
-  deb_packages=$deb_packages_amd64
+codename=$(grep "^DISTRIB_CODENAME=" /etc/lsb-release | cut -f2 -d=)
+
+echo $codename $architecture
+
+if [ "$codename" == "precise" ]; then
+  if [ "$architecture" == "x86_64" ]; then
+    deb_packages=$deb_packages_precise_amd64
+  elif [ "$architecture" != "amd64" ]; then
+    deb_packages=$deb_packages_precise_amd64
+  else
+    deb_packages=$deb_packages_precise_i386
+  fi
 else
-  deb_packages=$deb_packages_i386
+  if [ "$architecture" == "x86_64" ]; then
+    deb_packages=$deb_packages_trusty_amd64
+  elif [ "$architecture" != "amd64" ]; then
+    deb_packages=$deb_packages_trusty_amd64
+  else
+    deb_packages=$deb_packages_trusty_i386
+  fi
 fi
 
 # fix the grub issue (temporary)
