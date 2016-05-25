@@ -32,6 +32,8 @@ fi
 echo grub-pc grub-pc/install_devices multiselect /dev/sda | debconf-set-selections -
 dpkg --configure -a
 
+# Fix the hash sum mismatch
+rm /var/lib/apt/lists/* -Rf
 
 # Enter python virtual environment
 source /usr/local/te-va/venv/bin/activate
