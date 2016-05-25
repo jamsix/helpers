@@ -13,7 +13,7 @@ echo $codename $architecture
 if [ "$codename" == "precise" ]; then
   if [ "$architecture" == "x86_64" ]; then
     deb_packages=$deb_packages_precise_amd64
-  elif [ "$architecture" != "amd64" ]; then
+  elif [ "$architecture" == "amd64" ]; then
     deb_packages=$deb_packages_precise_amd64
   else
     deb_packages=$deb_packages_precise_i386
@@ -21,7 +21,7 @@ if [ "$codename" == "precise" ]; then
 else
   if [ "$architecture" == "x86_64" ]; then
     deb_packages=$deb_packages_trusty_amd64
-  elif [ "$architecture" != "amd64" ]; then
+  elif [ "$architecture" == "amd64" ]; then
     deb_packages=$deb_packages_trusty_amd64
   else
     deb_packages=$deb_packages_trusty_i386
