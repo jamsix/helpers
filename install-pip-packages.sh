@@ -44,6 +44,9 @@ if [ -n "$1" ]; then
 fi
 
 
+apt-get clean
+rm -fR /var/lib/apt/lists
+mkdir -p /var/lib/apt/lists/partial
 apt-get clean all
 apt-get update
 apt-get -y remove te-va
